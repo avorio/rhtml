@@ -44,13 +44,11 @@ sub html2xml {
     if (!(-e $file)) {
 	die "$file does not exist";
     }
-    my $path = `pwd`;
-    chomp($path);
     my $command = XVFB
         .' -n 99'
         .' '.XULRUNNER 
         .' '.RHTML
-        ." file://$path/$file"
+        ." file://$file"
         .' 2>&1';
     my $result = sysexec($command, 30, $opt{'d'});
     my $xml = Encode::decode_utf8($result || '');
